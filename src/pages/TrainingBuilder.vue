@@ -1,7 +1,10 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import Exercice from "@/components/organisms/Exercice.vue";
 import NumberField from "@/components/atoms/NumberField.vue";
+
+const router = useRouter();
 
 const newExercise = () => {
   return {
@@ -32,10 +35,21 @@ const totalSeconds = () => {
     return sum + exTotal + between;
   }, 0);
 };
+
+const startTraining = () => {
+  localStorage.setItem(
+    "trainingData",
+    JSON.stringify({
+      exercises: exercises.value,
+      restBetweenSec: restBetweenSec.value,
+    })
+  );
+  router.push({ name: "run" });
+};
 </script>
 
 <template>
-  <main class="min-h-screen bg-neutral-950 text-neutral-100">
+  <div class="min-h-screen bg-neutral-950 text-neutral-100">
     <section class="mx-auto w-full max-w-6xl p-6 space-y-6">
       <header class="flex items-center justify-between">
         <h1 class="text-3xl font-bold">Créateur d’entraînement</h1>
@@ -84,6 +98,14 @@ const totalSeconds = () => {
           />
         </div>
       </div>
+      <div class="flex justify-center mt-8">
+        <button
+          class="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 font-semibold text-lg"
+          @click="startTraining"
+        >
+          ▶️ Démarrer l'entraînement
+        </button>
+      </div>
     </section>
-  </main>
+  </div>
 </template>
