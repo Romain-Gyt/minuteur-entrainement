@@ -1,5 +1,4 @@
 import "./assets/main.css";
 import { createApp } from "vue";
-import App from "./App.vue"; // on monte l'app racine, pas directement TimerPanel
-
+import App from "./App.vue";
 createApp(App).mount("#app");
