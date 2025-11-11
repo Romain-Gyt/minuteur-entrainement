@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => ({
     VitePWA({
       apply: "build",
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+      includeAssets: ["favicon.ico"],
       manifest: {
         name: "Training App",
         short_name: "Training",
