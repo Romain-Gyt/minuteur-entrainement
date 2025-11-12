@@ -3,23 +3,23 @@ import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
 import { fileURLToPath, URL } from "node:url";
 
-// 🔧 adapte ce nom si ton repo GitHub est différent
 const repoBase = "/minuteur-entrainement/";
 
-export default defineConfig(({ mode }) => ({
-  base: mode === "production" ? repoBase : "/",
+export default defineConfig({
+  base: repoBase,
   plugins: [
     vue(),
     VitePWA({
       apply: "build",
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico"],
+      includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
       manifest: {
         name: "Training App",
         short_name: "Training",
         description: "Créateur et minuteur d’entraînement d’escalade",
-        start_url: `${repoBase}`, // ✅ sans hash
-        scope: `${repoBase}`,
+        // ✅ start_url et scope corrigés
+        start_url: repoBase + "#/builder",
+        scope: repoBase,
         display: "standalone",
         theme_color: "#10b981",
         background_color: "#0b0b0b",
@@ -36,11 +36,11 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
-        navigateFallback: "index.html", // ✅ fallback correct
+        navigateFallback: "index.html",
       },
     }),
   ],
   resolve: {
     alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
   },
-}));
+});
