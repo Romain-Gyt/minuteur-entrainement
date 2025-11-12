@@ -28,7 +28,8 @@ const decrement = () => {
   emit("update:modelValue", clamp(displayValue.value - props.step));
 };
 
-const h = props.compact ? "h-9" : "h-10";
+// Height: slightly larger on small screens for better touch targets
+const h = props.compact ? "h-10 sm:h-9" : "h-11 sm:h-10";
 </script>
 
 <template>

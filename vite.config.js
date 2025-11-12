@@ -17,7 +17,8 @@ export default defineConfig({
         name: "Training App",
         short_name: "Training",
         description: "Créateur et minuteur d’entraînement d’escalade",
-        start_url: repoBase + "#/builder",
+        // ✅ start_url et scope corrigés
+        start_url: repoBase,
         scope: repoBase,
         display: "standalone",
         theme_color: "#10b981",

@@ -5,7 +5,7 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <div class="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col">
+  <div class="min-h-dvh bg-neutral-950 text-neutral-100 flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
     <HeaderBar>
       <!-- Exemple d’actions dans le header (facultatif)
       <template #actions>

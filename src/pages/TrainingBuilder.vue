@@ -50,8 +50,8 @@ const startTraining = () => {
 
 <template>
   <div class="min-h-screen bg-neutral-950 text-neutral-100">
-    <section class="mx-auto w-full max-w-6xl p-6 space-y-6">
-      <header class="flex items-center justify-between">
+    <section class="mx-auto w-full max-w-6xl p-4 sm:p-6 space-y-6">
+      <header class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <h1 class="text-3xl font-bold">Créateur d’entraînement</h1>
         <div class="text-sm text-neutral-400">
           Total théorique :
@@ -88,7 +88,7 @@ const startTraining = () => {
           + Ajouter un exercice
         </button>
 
-        <div class="w-64">
+        <div class="w-full sm:w-64">
           <NumberField
             label="Repos entre exercices"
             labelSuffix="(s)"

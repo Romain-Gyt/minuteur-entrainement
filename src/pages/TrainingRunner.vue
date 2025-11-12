@@ -148,8 +148,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="max-w-5xl mx-auto p-6 space-y-8">
-    <header class="flex items-center justify-between">
+  <section class="max-w-5xl mx-auto p-4 sm:p-6 space-y-8">
+    <header class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
       <h1 class="text-3xl font-bold">Entraînement</h1>
       <div class="text-sm text-neutral-400">
         {{ training?.exercises?.length ?? 0 }} exercices • Repos inter :
