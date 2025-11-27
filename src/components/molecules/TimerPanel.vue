@@ -40,7 +40,7 @@ const restSerieProxy = computed({
 </script>
 
 <template>
-  <section class="grid grid-cols-1 sm:grid-cols-5 sm:gap-8">
+  <section class="grid grid-cols-2 gap-3 sm:grid-cols-5 sm:gap-8">
     <NumberField
       label="Travail"
       labelSuffix="(s)"

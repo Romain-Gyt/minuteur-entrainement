@@ -18,7 +18,6 @@ const routes = [
 ];
 
 export const router = createRouter({
-  // Use Vite's injected base to work under subfolders (e.g., GitHub Pages)
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });

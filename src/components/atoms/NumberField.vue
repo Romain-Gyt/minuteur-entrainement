@@ -42,7 +42,7 @@ const h = props.compact ? "h-10 sm:h-9" : "h-11 sm:h-10";
       >
         <button
           type="button"
-          :class="['px-3 rounded-l-xl hover:bg-neutral-800 active:scale-95', h]"
+          :class="['px-3 rounded-l-xl hover:bg-neutral-800 active:scale-95 touch-manipulation', h]"
           @click="decrement"
         >
           −
@@ -64,7 +64,7 @@ const h = props.compact ? "h-10 sm:h-9" : "h-11 sm:h-10";
 
         <button
           type="button"
-          :class="['px-3 rounded-r-xl hover:bg-neutral-800 active:scale-95', h]"
+          :class="['px-3 rounded-r-xl hover:bg-neutral-800 active:scale-95 touch-manipulation', h]"
           @click="increment"
         >
           +
