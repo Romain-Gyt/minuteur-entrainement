@@ -1,10 +1,16 @@
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import Exercice from "@/components/organisms/Exercice.vue";
 import NumberField from "@/components/atoms/NumberField.vue";
 
+import api from "@/services/api";
+
 const router = useRouter();
+const route = useRoute();
+const trainingName = ref("Mon Entraînement");
+const saving = ref(false);
+const isEditing = ref(false);
 
 const newExercise = () => {
   return {
@@ -20,6 +26,23 @@ const newExercise = () => {
 
 const exercises = ref([newExercise()]);
 const restBetweenSec = ref(120);
+
+onMounted(async () => {
+  if (route.params.id) {
+    isEditing.value = true;
+    try {
+      const response = await api.getWorkout(route.params.id);
+      const workout = response.data;
+      trainingName.value = workout.name;
+      exercises.value = workout.data.exercises || [];
+      restBetweenSec.value = workout.data.restBetweenSec || 120;
+    } catch (err) {
+      console.error("Failed to load workout", err);
+      alert("Impossible de charger l'entraînement");
+      router.push('/dashboard');
+    }
+  }
+});
 
 const addExercise = () => exercises.value.push(newExercise());
 const removeExercise = (id) =>
@@ -62,6 +85,36 @@ const totalSeconds = () => {
   }, 0);
 };
 
+const saveTraining = async () => {
+  if (!trainingName.value) {
+    alert("Veuillez donner un nom à votre entraînement");
+    return;
+  }
+
+  saving.value = true;
+  try {
+    const data = {
+      exercises: exercises.value,
+      restBetweenSec: restBetweenSec.value,
+    };
+
+    if (isEditing.value) {
+      await api.updateWorkout(route.params.id, { name: trainingName.value, data });
+      alert("Modifications enregistrées !");
+    } else {
+      await api.saveWorkout({ name: trainingName.value, data });
+      alert("Entraînement sauvegardé !");
+    }
+
+    router.push("/dashboard");
+  } catch (err) {
+    console.error(err);
+    alert("Erreur lors de la sauvegarde");
+  } finally {
+    saving.value = false;
+  }
+};
+
 const startTraining = () => {
   localStorage.setItem(
     "trainingData",
@@ -78,8 +131,13 @@ const startTraining = () => {
   <div class="min-h-screen bg-neutral-950 text-neutral-100 pb-32 sm:pb-10">
     <section class="mx-auto w-full max-w-6xl p-4 sm:p-6 space-y-6">
       <header class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sticky top-0 z-10 bg-neutral-950/80 backdrop-blur-md py-2 -mx-4 px-4 sm:static sm:bg-transparent sm:p-0 sm:mx-0">
-        <div>
-          <h1 class="text-3xl font-bold">Créateur</h1>
+        <div class="flex-1">
+          <input
+            v-model="trainingName"
+            type="text"
+            class="text-3xl font-bold bg-transparent border-none focus:ring-0 p-0 w-full placeholder-neutral-600"
+            placeholder="Nom de l'entraînement"
+          />
           <div class="text-sm text-neutral-400 mt-1">
             Total théorique :
             <span class="font-semibold text-neutral-200"
@@ -88,12 +146,21 @@ const startTraining = () => {
           </div>
         </div>
 
-        <button
-          @click="clearAll"
-          class="text-sm text-neutral-500 hover:text-rose-500 underline self-start sm:self-auto"
-        >
-          Tout effacer
-        </button>
+        <div class="flex items-center gap-4">
+          <button
+            @click="saveTraining"
+            :disabled="saving"
+            class="text-sm font-bold text-emerald-500 hover:text-emerald-400 disabled:opacity-50"
+          >
+            {{ saving ? 'Sauvegarde...' : '💾 Sauvegarder' }}
+          </button>
+          <button
+            @click="clearAll"
+            class="text-sm text-neutral-500 hover:text-rose-500 underline"
+          >
+            Tout effacer
+          </button>
+        </div>
       </header>
 
       <div class="space-y-6">

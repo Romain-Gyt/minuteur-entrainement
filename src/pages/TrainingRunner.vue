@@ -77,6 +77,12 @@ const computePhaseDuration = () => {
 const applyPhase = () => {
   total.value = computePhaseDuration();
   left.value = total.value;
+
+  // Reset animation if running
+  if (running.value) {
+    startTime.value = Date.now();
+    duration.value = total.value * 1000;
+  }
 };
 
 const nextStep = () => {
@@ -134,6 +140,8 @@ const runTimer = () => {
     left.value--;
     if (left.value > 0 && left.value <= 3) {
       playBeep(440, 0.1, "sine");
+    } else if (left.value === 0) {
+      playBeep(880, 0.3, "square"); // GO sound
     }
   } else {
     // It was 0, now we switch
