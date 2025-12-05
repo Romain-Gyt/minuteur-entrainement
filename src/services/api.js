@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const hostname = window.location.hostname;
+const isLocalDev = hostname === 'localhost' || hostname === '127.0.0.1';
 const api = axios.create({
-  baseURL: import.meta.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001/api',
+  baseURL: isLocalDev ? 'http://localhost:3001/api' : '/api',
 });
 
 // Add a request interceptor to attach the token
