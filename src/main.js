@@ -13,7 +13,7 @@ const updateSW = registerSW({
   },
   onOfflineReady() {
     // Optionnel: toast "L’app est prête hors-ligne"
-    console.log("PWA prête hors-ligne");
+
   },
 });
 

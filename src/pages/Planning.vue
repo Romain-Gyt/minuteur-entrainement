@@ -100,7 +100,7 @@ const scheduleWorkout = async () => {
       date: selectedDate.value.date,
       time: selectedTime.value
     });
-    console.log('Workout scheduled successfully', selectedWorkoutId.value, selectedDate.value.date, selectedTime.value);
+
     showModal.value = false;
     selectedWorkoutId.value = '';
     await fetchData();
