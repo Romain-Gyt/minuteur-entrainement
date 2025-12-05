@@ -7,15 +7,25 @@ const __dirname = path.dirname(__filename);
 
 import fs from 'fs';
 
-const dbPath = process.env.DB_PATH || path.join(__dirname, './server/database.sqlite');
+const dbPath = process.env.DB_PATH || path.join(__dirname, 'database.sqlite');
 const dbDir = path.dirname(dbPath);
 
 if (!fs.existsSync(dbDir)) {
-  fs.mkdirSync(dbDir, { recursive: true });
+  try {
+    fs.mkdirSync(dbDir, { recursive: true });
+  } catch (err) {
+    console.error(`Failed to create database directory at ${dbDir}:`, err);
+  }
 }
 
-const db = new Database(dbPath);
-console.log(`Connected to database at: ${dbPath}`);
+let db;
+try {
+  db = new Database(dbPath);
+  console.log(`Connected to database at: ${dbPath}`);
+} catch (err) {
+  console.error(`FAILED to connect to database at ${dbPath}:`, err);
+  process.exit(1);
+}
 
 // Initialize Database
 db.exec(`
