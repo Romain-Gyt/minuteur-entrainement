@@ -90,22 +90,6 @@ const formatDuration = (seconds) => {
 
 <template>
   <div class="min-h-screen bg-neutral-950 text-neutral-100 pb-20">
-    <!-- Header -->
-    <header class="sticky top-0 z-10 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-800">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-        <div>
-          <h1 class="text-2xl font-bold text-white">Mes Entraînements</h1>
-          <p class="text-sm text-neutral-400">Bonjour, {{ user?.username }}</p>
-        </div>
-        <button
-          @click="logout"
-          class="text-sm text-neutral-500 hover:text-white transition-colors"
-        >
-          Déconnexion
-        </button>
-      </div>
-    </header>
-
     <main class="max-w-6xl mx-auto p-4 space-y-8 mt-6">
       <!-- Actions -->
       <div class="flex justify-end">

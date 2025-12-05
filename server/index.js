@@ -7,6 +7,12 @@ import userRoutes from './routes/users.js';
 import scheduleRoutes from './routes/schedules.js';
 import workoutRoutes from './routes/workouts.js';
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -31,9 +37,12 @@ app.use('/api/user', userRoutes);
 app.use('/api/schedules', scheduleRoutes);
 app.use('/api/workouts', workoutRoutes);
 
-// Test route
-app.get('/api/test', (req, res) => {
-  res.send('Server is running and updated (Modular)');
+// Serve static files from the Vue app build
+app.use(express.static(path.join(__dirname, '../dist')));
+
+// Handle SPA fallback
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 // Global Error Handler

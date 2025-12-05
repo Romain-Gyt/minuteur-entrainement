@@ -69,7 +69,7 @@ const logout = () => {
     >
       <div class="flex items-center gap-8">
         <h1 class="text-xl font-bold tracking-wide text-emerald-400">
-          Training App
+          MyTimer
         </h1>
 
         <nav class="hidden sm:flex gap-2">
@@ -104,7 +104,7 @@ const logout = () => {
                 : 'text-neutral-300 hover:text-emerald-400'
             "
           >
-            🧩 Builder
+            🧩 Créateur de séance
           </RouterLink>
         </nav>
       </div>

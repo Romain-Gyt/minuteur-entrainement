@@ -6,13 +6,7 @@ import { RouterView } from "vue-router";
 
 <template>
   <div class="min-h-dvh bg-neutral-950 text-neutral-100 flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
-    <HeaderBar>
-      <!-- Exemple d’actions dans le header (facultatif)
-      <template #actions>
-        <button class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Action</button>
-      </template>
-      -->
-    </HeaderBar>
+    <HeaderBar />
 
     <main class="mx-auto max-w-6xl w-full px-6 py-8 flex-1">
       <RouterView v-slot="{ Component }">

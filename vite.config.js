@@ -3,7 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
 import { fileURLToPath, URL } from "node:url";
 
-const repoBase = "/minuteur-entrainement/";
+const repoBase = "/";
 
 export default defineConfig({
   base: repoBase,
